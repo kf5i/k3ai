@@ -21,7 +21,7 @@ Install inside a vagrant machine
 curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install_vagrant | bash -
 ```
 
-## What do I find within K3Ai
+## What do I find within K3Ai?
 
 K3ai supports a variety of artificial intelligence tools that can be installed as standalone or as a bundle from directly from the command-line. The actual list may be run adding the below options after `k3ai server` the command:
 
