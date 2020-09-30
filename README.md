@@ -12,7 +12,7 @@ description: >-
 Start by installing K3Ai with this:
 
 ```text
-curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install | sh -
+curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install | bash -
 ```
 
 wait for a minute and check the status of installation with:
