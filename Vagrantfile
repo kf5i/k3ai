@@ -68,6 +68,11 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
    config.vm.provision "shell", inline: <<-SHELL
-      sudo zypper -n in  git
+      curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubectl
+      chmod +x ./kubectl
+      sudo mv ./kubectl /usr/bin/kubectl
+      sudo zypper -n in git
+      curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install | bash -
+      echo "Vagrant: Kubeflow Pipelines are redy on http://192.168.100.55"
    SHELL
 end

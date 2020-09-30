@@ -1,0 +1,4 @@
+#!/bin/bash
+
+curl https://raw.githubusercontent.com/kf5i/k3ai/master/Vagrantfile -o Vagrantfile
+vagrant up

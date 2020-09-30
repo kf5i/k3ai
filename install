@@ -111,6 +111,9 @@ sleep_cursor
 info "K3s AI ready!!"
 
 info "To use kubectl: export KUBECONFIG=/etc/rancher/k3s/k3s.yaml"
+info "or you can use k3s kubectl "
+info "k3s-uninstall.sh to uninstall"
 
 IP=$(kubectl get service/traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}' -n kube-system)
 info "pipelines UI: http://"$IP 
+
