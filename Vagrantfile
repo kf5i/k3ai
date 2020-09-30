@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "opensuse/Leap-15.2.x86_64"
-  config.vm.box_version = "15.2.31.149"
+  config.vm.box_version = "15.2.31.186"
   config.vm.network "private_network", ip: "192.168.100.55"
 
 
