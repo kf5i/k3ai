@@ -21,23 +21,29 @@ Install inside a vagrant machine
 curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install_vagrant | bash -
 ```
 
-Notes:
-
-During the installation you can see, errors like:
+#### **Notes: sometimes things take longer than expected and you may see the error below:**
 
 ```text
 error: timed out waiting for the condition on deployments/cache-server
 ```
-Don't worry about that.. just wait
 
-The installation take a few minutes expecially the Vagrant one. 
+Don't worry about that sometimes the installation takes a few minutes especially the Vagrant one or if you have limited bandwidth.
+
+Still curious how this look like ? Here's a short demo:
+
 
 
 ## What do I find within K3Ai
-=======
+
 K3ai supports a variety of artificial intelligence tools that can be installed as standalone or as a bundle from directly from the command-line. The actual list may be run adding the below options after `k3ai server` the command:
 
 `-- pipelines` \(default\): Kubeflow pipelines are installed as default settings so there's no need to explicit the command. If one desires, anyway, to add to an existing k3ai custom installation the command will install and configure the Kubeflow pipelines automatically.
 
 `-- tekton` \(**WIP**\)
+
+`--GPU` \(**WIP**\)
+
+-`-KFServing` \(**WIP**\)
+
+`--Triton` \(**WIP**\)
 
