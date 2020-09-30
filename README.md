@@ -15,15 +15,16 @@ Start by installing K3Ai with this:
 curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install | bash -
 ```
 
-The installation may need a few minutes
+Install inside a vagrant machine
 
 ```text
-kubectl get pods -n kubeflow
+curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install_vagrant | bash -
 ```
 
-when all pods are in status `running` you're good to go.
 
-![K3ai installation process](.gitbook/assets/demo.gif)
+
+
+
 
 ## What do I find within K3Ai
 
