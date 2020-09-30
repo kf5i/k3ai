@@ -43,9 +43,9 @@ K3ai supports a variety of artificial intelligence tools that can be installed a
 
 `-- tekton` \(**WIP**\)
 
-`--GPU` \(**WIP**\)
+`--gpu` \(**WIP**\)
 
--`-KFServing` \(**WIP**\)
+-`-kfserving` \(**WIP**\)
 
-`--Triton` \(**WIP**\)
+`--triton` \(**WIP**\)
 
