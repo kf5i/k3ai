@@ -22,6 +22,18 @@ curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install_vagrant | b
 ```
 
 
+Notes:
+
+During the installation you can see, errors like:
+
+```text
+error: timed out waiting for the condition on deployments/cache-server
+```
+Don't worry about that.. just wait
+
+The installation take a few minutes expecially the Vagrant one. 
+
+
 ## What do I find within K3Ai
 
 K3ai supports a variety of artificial intelligence tools that can be installed as standalone or as a bundle from directly from the command-line. The actual list may be run adding the below options after `k3ai server` the command:
