@@ -45,7 +45,11 @@ K3ai supports a variety of artificial intelligence tools that can be installed a
 
 `--gpu` \(**WIP**\)
 
--`-kfserving` \(**WIP**\)
+-`-tf-resnet` \(**WIP**\)
+
+-`-tf-mnist` \(**WIP**\)
+
+-`-tf-mxnet` \(**WIP**\)
 
 `--triton` \(**WIP**\)
 
