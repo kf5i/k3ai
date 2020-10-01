@@ -1,0 +1,60 @@
+# Copyright 2017 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mnist-service
+  labels:
+    app: mnist-service
+spec:
+  ports:
+  - port: 8080
+    targetPort: mms
+  selector:
+    app: mnist-service
+  type: LoadBalancer
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mnist-service
+  labels:
+    app: mnist-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mnist-service
+  template:
+    metadata:
+      labels:
+        app: mnist-service
+    spec:
+      containers:
+      - name: mnist-service
+        image: rgaut/deeplearning-mxnet:inference
+        args:
+        - mxnet-model-server
+          --start
+          --model-store /home/model-server/archived_model
+          --models mnist=mnist_cnn.mar
+        ports:
+        - name: mms
+          containerPort: 8080
+        - name: mms-management
+          containerPort: 8081
+        imagePullPolicy: IfNotPresent
