@@ -35,7 +35,7 @@ Still curious how this looks like? Here's a short demo:
 
 ![](.gitbook/assets/aio.gif)
 
-## What do I find within K3Ai
+## What do I find within K3Ai (WIP)
 
 K3ai supports a variety of artificial intelligence tools that can be installed as standalone or as a bundle from directly from the command-line. The actual list may be run adding the below options after `k3ai server` the command:
 
@@ -45,11 +45,13 @@ K3ai supports a variety of artificial intelligence tools that can be installed a
 
 `--gpu` \(**WIP**\)
 
--`-tf-resnet` \(**WIP**\)
+`--tf-resnet` \(**WIP**\)
 
--`-tf-mnist` \(**WIP**\)
+`--tf-mnist` \(**WIP**\)
 
--`-tf-mxnet` \(**WIP**\)
+`--tf-mxnet` \(**WIP**\)
+
+`--seldon` \(**WIP**\)
 
 `--triton` \(**WIP**\)
 
