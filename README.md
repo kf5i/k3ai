@@ -35,27 +35,3 @@ Still curious how this looks like? Here's a short demo:
 
 ![](.gitbook/assets/aio.gif)
 
-## What do I find within K3Ai \(WIP\)
-
-K3ai supports a variety of artificial intelligence tools that can be installed as standalone or as a bundle from directly from the command-line. The actual list may be run adding the below options after `k3ai server` the command:
-
-`-- pipelines` \(default\): Kubeflow pipelines are installed as default settings so there's no need to explicit the command. If one desires, anyway, to add to an existing k3ai custom installation the command will install and configure the Kubeflow pipelines automatically.
-
-`-- tekton` \(**WIP**\)
-
-`--gpu` To enable GPU support  there are few steps than need to be done before issue the following command:
-
-```text
-curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -s -- --gpu
-```
-
-`--tf-resnet` \(**WIP**\)
-
-`--tf-mnist` \(**WIP**\)
-
-`--tf-mxnet` \(**WIP**\)
-
-`--seldon` \(**WIP**\)
-
-`--triton` \(**WIP**\)
-
