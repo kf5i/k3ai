@@ -17,7 +17,7 @@ Start by installing K3Ai with this:
 curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -
 ```
 
-Install inside a vagrant machine
+Do you want to use Vagrant? We got you covered!
 
 ```text
 curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install_vagrant | bash -
