@@ -23,7 +23,7 @@ Install inside a vagrant machine
 curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install_vagrant | bash -
 ```
 
-#### **Notes: sometimes things take longer than expected and you may see the error below:**
+### **Notes: sometimes things take longer than expected and you may see the error below:**
 
 ```text
 error: timed out waiting for the condition on xxxxxxx
@@ -35,7 +35,7 @@ Still curious how this looks like? Here's a short demo:
 
 ![](.gitbook/assets/aio.gif)
 
-## What do I find within K3Ai (WIP)
+## What do I find within K3Ai \(WIP\)
 
 K3ai supports a variety of artificial intelligence tools that can be installed as standalone or as a bundle from directly from the command-line. The actual list may be run adding the below options after `k3ai server` the command:
 
@@ -43,7 +43,11 @@ K3ai supports a variety of artificial intelligence tools that can be installed a
 
 `-- tekton` \(**WIP**\)
 
-`--gpu` \(**WIP**\)
+`--gpu` To enable GPU support  there are few steps than need to be done before issue the following command:
+
+```text
+curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -s -- --gpu
+```
 
 `--tf-resnet` \(**WIP**\)
 
