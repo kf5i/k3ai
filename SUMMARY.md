@@ -1,6 +1,7 @@
 # Table of contents
 
-* [Quick Start Guide](README.md)
+* [K3ai \(keɪ3ai\)](README.md)
+* [Quick Start](quick-start.md)
 * [Remove k3ai](remove-k3ai.md)
 
 ## Configuration Options

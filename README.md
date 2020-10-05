@@ -5,33 +5,19 @@ description: >-
   solutions
 ---
 
-# Quick Start Guide
+# K3ai \(keɪ3ai\)
 
-## First things First
+## What is K3ai
 
-If you like we also have a documentation website here: [https://k3ai.gitbook.io/docs/](https://k3ai.gitbook.io/docs/)
+![k3ai in action](.gitbook/assets/aio.gif)
 
-Start by installing K3Ai with this:
+K3ai is a lightweight infrastructure in a box specifically built to install and configure AI tools and platforms to quickly experiment and/or run in production over edge devices.
 
-```text
-curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -
-```
+## Components of K3ai
 
-Do you want to use Vagrant? We got you covered!
+Currently, we do install the following components \(the list is changing and growing\):
 
-```text
-curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install_vagrant | bash -
-```
-
-### **Notes: sometimes things take longer than expected and you may see the error below:**
-
-```text
-error: timed out waiting for the condition on xxxxxxx
-```
-
-Don't worry about that sometimes the installation takes a few minutes especially the Vagrant one or if you have limited bandwidth.
-
-Still curious how this looks like? Here's a short demo:
-
-![](.gitbook/assets/aio.gif)
+* Kubernetes based on K3s from Rancher: [https://k3s.io/](https://k3s.io/)
+* Kubeflow pipelines: [https://github.com/kubeflow/pipelines](https://github.com/kubeflow/pipelines)
+* NVIDIA GPU support: [https://docs.nvidia.com/datacenter/cloud-native/index.html](https://docs.nvidia.com/datacenter/cloud-native/index.html)
 
