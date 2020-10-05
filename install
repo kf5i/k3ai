@@ -42,8 +42,16 @@ while [ : ]
 }
 
 
-
-curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+if [ $1 = "--gpu" ]
+  then   
+    info "Install Pipelines with GPU support, docker as runtime"
+    curl -sfL https://get.k3s.io | sh -s - --docker --kubelet-arg="feature-gates=DevicePlugins=true" --write-kubeconfig-mode 644
+    #### GPU Support
+    kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.7.0/nvidia-device-plugin.yml
+  else  
+    info "Install Pipelines without GPU support, containerd as runtime"
+    curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+fi
 
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
@@ -70,10 +78,6 @@ for i in "${waiting_pod_array[@]}"; do
   IFS=';' read -ra VALUES <<< "$i"
     wait "${VALUES[0]}" "${VALUES[1]}"
 done
-
-
-#### GPU Support
-kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.7.0/nvidia-device-plugin.yml
 
 
 
