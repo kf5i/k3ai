@@ -13,6 +13,12 @@ description: >-
 
 K3ai is a lightweight infrastructure in a box specifically built to install and configure AI tools and platforms to quickly experiment and/or run in production over edge devices.
 
+Ready to experiment?
+
+```text
+curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -
+```
+
 ## Components of K3ai
 
 Currently, we do install the following components \(the list is changing and growing\):
