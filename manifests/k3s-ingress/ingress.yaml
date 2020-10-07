@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: IngressClass
+metadata: 
+  name: traefik-lb
+spec: 
+  controller: traefik.io/ingress-controller
+---
+apiVersion: "networking.k8s.io/v1beta1"
+kind: "Ingress"
+metadata:
+  name: "example-ingress"
+  namespace: kubeflow
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    
+spec:
+  ingressClassName: "traefik-lb"
+  rules:
+  - http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: "ml-pipeline-ui"
+          servicePort: 80
