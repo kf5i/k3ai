@@ -87,6 +87,7 @@ kf_pipeline()
 
         info "Defining the ingress"
         sleep_cursor
+        info "Kubeflow pipelines ready!!"
 }
 
 triton_cpu()
@@ -99,13 +100,10 @@ helm init --service-account tiller --wait
 helm repo add minio https://helm.min.io/
 helm install --name minio --namespace minio  minio/minio --set defaultBucket.enabled=true --set defaultBucket.name=triton --set accessKey=minio --set secretKey=minio123
 
-
 #Install prometheus
 helm install --name triton-metrics --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false stable/prometheus-operator
-
 #Install Triton
 helm install --name triton ./manifest/inference/triton/cpu/
-
 }
 
  kf_ingress()
