@@ -97,14 +97,14 @@ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admi
 helm init --service-account tiller --wait
 #Install minio
 helm repo add minio https://helm.min.io/
-helm install --namespace minio --generate-name minio/minio --set defaultBucket.enabled=true --set defaultBucket.name=triton_models
+helm install --name minio --namespace minio  minio/minio --set defaultBucket.enabled=true --set defaultBucket.name=triton --set accessKey=minio --set secretKey=minio123
 
 
 #Install prometheus
 helm install --name triton-metrics --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false stable/prometheus-operator
 
 #Install Triton
-helm install --name triton /inference/triton/cpu/
+helm install --name triton ./manifest/inference/triton/cpu/
 
 }
 

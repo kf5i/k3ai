@@ -29,7 +29,7 @@ replicaCount: 1
 image:
   imageName: nvcr.io/nvidia/tritonserver:20.08-py3
   pullPolicy: IfNotPresent
-  modelRepositoryPath: minio://triton-inference
+  modelRepositoryPath: minio://triton
   numGpus: 0
 
 service:
