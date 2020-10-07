@@ -42,8 +42,42 @@ while [ : ]
 }
 
 
+<<<<<<< Updated upstream
 
 curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+=======
+if [ $1 = "--gpu" ] || [ $2 = "--triton"]
+  then   
+    info "Install NVIDIA Triton Inference server  with GPU support, docker as runtime"
+    curl -sfL https://get.k3s.io | sh -s - --docker --kubelet-arg="feature-gates=DevicePlugins=true" --write-kubeconfig-mode 644
+    #### GPU Support
+    kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.7.0/nvidia-device-plugin.yml
+    # Installing Helm and preparing environment
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+    kubectl create serviceaccount -n kube-system tiller
+    kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+    helm init --service-account tiller --wait
+    # Installing minio and prepare environment
+    helm repo add minio https://helm.min.io/
+    helm install minio minio/minio
+    #Installing Prometheus
+    helm install --name triton-metrics --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false stable/prometheus-operator
+    helm install --name ./triton manifest/inference/triton/
+  elif  [$1 ="--triton"]
+    info "Install NVIDIA Triton Inference server without GPU support, containerd as runtime"
+    curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+    # Installing Helm and preparing environment
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
+    kubectl create serviceaccount -n kube-system tiller
+    kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+    helm init --service-account tiller --wait
+    #Installing Prometheus
+    helm install --name triton-metrics --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false stable/prometheus-operator
+    helm install --name ./triton manifest/inference/triton/
+fi
+>>>>>>> Stashed changes
+
+if [$1 == "--gpu" ]
 
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
