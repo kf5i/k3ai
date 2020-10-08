@@ -8,3 +8,7 @@
 
 * [GPU support](configuration-options/gpu-support.md)
 
+## Cloud Providers
+
+* [Civo](cloud-providers/civo.md)
+
