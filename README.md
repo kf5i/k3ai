@@ -21,7 +21,7 @@ curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -
 
 More curious?  [https://k3ai.gitbook.io/docs/](https://k3ai.gitbook.io/docs/)
 
-Look for interaction with us? Join our slack channel:  [**https://kf5ikfai.slack.com**](https://kf5ikfai.slack.com)\*\*\*\*
+Look for interaction with us? Join our slack channel:  [**https://kf5ikfai.slack.com**](https://join.slack.com/t/kf5ikfai/shared_invite/zt-huh5ib1f-ZyBxqyBDKooGNvpd5_MoQQ)\*\*\*\*
 
 ## Components of K3ai
 
