@@ -6,14 +6,8 @@ If you like we also have a documentation website here: [https://k3ai.gitbook.io/
 
 Start by installing K3Ai with this:
 
-```text
+```bash
 curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -
-```
-
-Do you want to use Vagrant? We got you covered!
-
-```text
-curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install_vagrant | bash -
 ```
 
 ### **Notes: sometimes things take longer than expected and you may see the error below:**
