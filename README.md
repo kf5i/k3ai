@@ -19,7 +19,7 @@ Ready to experiment?
 curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -
 ```
 
-More curious?  [https://k3ai.gitbook.io/docs/](https://k3ai.gitbook.io/docs/)
+More curious?  [https://kf5ai.gitbook.io/k3ai/](https://kf5ai.gitbook.io/k3ai/)
 
 Look for interaction with us? Join our slack channel:  [**https://kf5ikfai.slack.com**](https://join.slack.com/t/kf5ikfai/shared_invite/zt-huh5ib1f-ZyBxqyBDKooGNvpd5_MoQQ)
 
