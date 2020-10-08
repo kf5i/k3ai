@@ -5,47 +5,30 @@ description: >-
   solutions
 ---
 
-# Quick Start Guide
+# K3ai \(keɪ3ai\)
 
-## First things First
+## What is K3ai
 
-If you like we also have a documentation website here: [https://k3ai.gitbook.io/docs/](https://k3ai.gitbook.io/docs/)
+![k3ai in action](.gitbook/assets/aio.gif)
 
-Start by installing K3Ai with this:
+K3ai is a lightweight infrastructure in a box specifically built to install and configure AI tools and platforms to quickly experiment and/or run in production over edge devices.
 
-```text
-curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install | bash -
-```
-
-Install inside a vagrant machine
+Ready to experiment?
 
 ```text
-curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/install_vagrant | bash -
+curl -sfL https://github.com/kf5i/k3ai/releases/latest/download/install | bash -
 ```
 
-#### **Notes: sometimes things take longer than expected and you may see the error below:**
+More curious?  [https://k3ai.gitbook.io/docs/](https://k3ai.gitbook.io/docs/)
 
-```text
-error: timed out waiting for the condition on deployments/cache-server
-```
+## Components of K3ai
 
-Don't worry about that sometimes the installation takes a few minutes especially the Vagrant one or if you have limited bandwidth.
+Currently, we do install the following components \(the list is changing and growing\):
 
-Still curious how this looks like? Here's a short demo:
-
-![](.gitbook/assets/aio.gif)
-
-## What do I find within K3Ai
-
-K3ai supports a variety of artificial intelligence tools that can be installed as standalone or as a bundle from directly from the command-line. The actual list may be run adding the below options after `k3ai server` the command:
-
-`-- pipelines` \(default\): Kubeflow pipelines are installed as default settings so there's no need to explicit the command. If one desires, anyway, to add to an existing k3ai custom installation the command will install and configure the Kubeflow pipelines automatically.
-
-`-- tekton` \(**WIP**\)
-
-`--gpu` \(**WIP**\)
-
--`-kfserving` \(**WIP**\)
-
-`--triton` \(**WIP**\)
+* Kubernetes based on K3s from Rancher: [https://k3s.io/](https://k3s.io/)
+* Kubeflow pipelines: [https://github.com/kubeflow/pipelines](https://github.com/kubeflow/pipelines)
+* Kubeflow: [https://www.kubeflow.org/](https://www.kubeflow.org/) - coming soon
+* NVIDIA GPU support: [https://docs.nvidia.com/datacenter/cloud-native/index.html](https://docs.nvidia.com/datacenter/cloud-native/index.html)
+* NVIDIA Triton inference server **\(Work in progress**\): [https://github.com/triton-inference-server/server/tree/master/deploy/single\_server](https://github.com/triton-inference-server/server/tree/master/deploy/single_server)
+* Tensorflow Serving: [https://www.tensorflow.org/tfx/serving/serving\_kubernetes](https://www.tensorflow.org/tfx/serving/serving_kubernetes) - coming soon
 
