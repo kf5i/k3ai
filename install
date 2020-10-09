@@ -124,7 +124,7 @@ k3s_install_service()
 {
   info "Installing k3s service with the following parameters:" "${INSTALL_K3S_EXEC} ${INTERNAL_INSTALL_K3S_EXEC}"
   curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="${INSTALL_K3S_EXEC} ${INTERNAL_INSTALL_K3S_EXEC}"  sh -s -
-  export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+   export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 }
 
 k3s_install_service_gpu()
@@ -145,7 +145,11 @@ default_installation(){
 
 
 manage_plugin(){
- info "plugin" $1
+ PLUGIN=$1
+ PLUGIN="${PLUGIN:2}"
+ info "plugin" $PLUGIN
+ 
+ curl -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/$PLUGIN/install | bash -s -
 }
 
 
