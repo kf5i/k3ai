@@ -111,23 +111,26 @@ EOF
 EOF
 
 sleep_cursor
+
+IP=$(kubectl get service/traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}' -n kube-system)
+info "pipelines UI: http://"$IP 
 }
 
 ##################
-INTERNAL_OPTIONS=""
+INTERNAL_INSTALL_K3S_EXEC=""
 
 
 k3s_install_service()
 {
-  info "Installing k3s service with the following parameters:" "${INSTALL_K3S_EXEC} ${INTERNAL_OPTIONS}"
-  curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="${INSTALL_K3S_EXEC} ${INTERNAL_OPTIONS}"  sh -s -
+  info "Installing k3s service with the following parameters:" "${INSTALL_K3S_EXEC} ${INTERNAL_INSTALL_K3S_EXEC}"
+  curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="${INSTALL_K3S_EXEC} ${INTERNAL_INSTALL_K3S_EXEC}"  sh -s -
   export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 }
 
-k3s_install_gpu()
+k3s_install_service_gpu()
 {
   info "Installing the GPU Support on docker"
-  INTERNAL_OPTIONS="--docker"  
+  INTERNAL_INSTALL_K3S_EXEC="--docker"  
   k3s_install_service 
   #### GPU Support
   kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.7.0/nvidia-device-plugin.yml
@@ -140,27 +143,65 @@ default_installation(){
     kubeflow_install_pipelines
 }
 
+
+manage_plugin(){
+ info "plugin" $1
+}
+
+
+manage() {
+    ### DEFAULT == --cpu and --pipelines
+  #  if [[ "$#" -eq 0 ]]; then
+  #   kubeflow_install_pipelines
+  #  fi  
+    while [[ "$#" -ne 0 ]]; do
+      case "$1" in
+      "--pipelines")          
+          kubeflow_install_pipelines  
+          shift 1
+          ;;
+      --plugin*)
+          info "Installing plugin:" "$1"
+          manage_plugin  "$1"
+          shift 1
+          ;;
+      *)
+          shift 1
+          ;;
+      esac
+    done
+}
+
+
+
+
 main() {
-    ### DEFAULT == --pipelines
+    ### DEFAULT == --cpu and --pipelines
     if [[ "$#" -eq 0 ]]; then
      default_installation
     fi  
+    OR="$@"
     while [[ "$#" -ne 0 ]]; do
       case "$1" in
       "--gpu")
+          k3s_install_service_gpu
+          manage $OR
           shift 1
-          k3s_install_gpu
-          kubeflow_install_pipelines
           ;;
-      "--pipelines")
+      "--cpu")
+          info "Installing the CPU Support"
+          k3s_install_service
+          manage $OR
           shift 1
-          echo "pipelines"
-          default_installation
           ;;
+      "--skipk3s")
+          info "Skip Installation Server"
+          manage $OR
+          shift 1
+          ;;
+
       *)
-          echo "No Valid parameters"
-          ### todo implement the help
-          exit 1
+          shift 1
           ;;
       esac
     done
@@ -172,6 +213,4 @@ main "$@"
 info "K3ai setup finished"
 info "k3s-uninstall.sh to uninstall"
 
-IP=$(kubectl get service/traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}' -n kube-system)
-info "pipelines UI: http://"$IP 
 
