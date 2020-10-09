@@ -147,8 +147,8 @@ default_installation(){
 manage_plugin(){
  PLUGIN=$1
  PLUGIN="${PLUGIN:2}"
- info "plugin" $PLUGIN
- 
+ info "Installing plugin: " $PLUGIN
+ info "URL:" https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/$PLUGIN/install
  curl -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/$PLUGIN/install | bash -s -
 }
 
