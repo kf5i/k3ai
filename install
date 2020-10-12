@@ -50,70 +50,7 @@ while [ : ]
 }
 
 kubeflow_install_pipelines(){
-    info "Installing pipelines crd"
-    export PIPELINE_VERSION=1.0.1
-    kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/cluster-scoped-resources?ref=$PIPELINE_VERSION"
-    kubectl wait --for condition=established --timeout=60s crd/applications.app.k8s.io
-    sleep_cursor &
-    info "Installing pipelines manifests"
-    kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/env/platform-agnostic-pns?ref=$PIPELINE_VERSION"
-
-    waiting_pod_array=("k8s-app=kube-dns;kube-system" 
-                       "k8s-app=metrics-server;kube-system"
-                       "app=traefik;kube-system"  
-                       "app=minio;kubeflow"
-                       "app=mysql;kubeflow"
-                       "app=cache-server;kubeflow"
-                       "app=ml-pipeline-persistenceagent;kubeflow"
-                       "component=metadata-grpc-server;kubeflow"
-                       "app=ml-pipeline-ui;kubeflow")
-
-    for i in "${waiting_pod_array[@]}"; do 
-      echo "$i"; 
-      IFS=';' read -ra VALUES <<< "$i"
-        wait "${VALUES[0]}" "${VALUES[1]}"
-    done
-
-
-
-    info "Kubeflow pipelines ready!!"
-
-    info "Defining the ingress"
-    sleep_cursor
-
-    kubectl apply -f - << EOF
-      apiVersion: networking.k8s.io/v1beta1
-      kind: IngressClass
-      metadata: 
-        name: traefik-lb
-      spec: 
-        controller: traefik.io/ingress-controller
-EOF
-
-    kubectl apply -f - << EOF
-      apiVersion: "networking.k8s.io/v1beta1"
-      kind: "Ingress"
-      metadata:
-        name: "pipeline-ingress"
-        namespace: kubeflow
-        annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /$2
-          
-      spec:
-        ingressClassName: "traefik-lb"
-        rules:
-        - http:
-            paths:
-            - path: "/"
-              backend:
-                serviceName: "ml-pipeline-ui"
-                servicePort: 80
-EOF
-
-sleep_cursor
-
-IP=$(kubectl get service/traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}' -n kube-system)
-info "pipelines UI: http://"$IP 
+    manage_plugin "--plugin_kfpipelines"
 }
 
 ##################
@@ -124,7 +61,8 @@ k3s_install_service()
 {
   info "Installing k3s service with the following parameters:" "${INSTALL_K3S_EXEC} ${INTERNAL_INSTALL_K3S_EXEC}"
   curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="${INSTALL_K3S_EXEC} ${INTERNAL_INSTALL_K3S_EXEC}"  sh -s -
-   export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+  export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+  wait_k3s
 }
 
 k3s_install_service_gpu()
@@ -133,7 +71,7 @@ k3s_install_service_gpu()
   INTERNAL_INSTALL_K3S_EXEC="--docker"  
   k3s_install_service 
   #### GPU Support
-  kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.7.0/nvidia-device-plugin.yml
+  k3s kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.7.0/nvidia-device-plugin.yml
 }
 
 
@@ -143,6 +81,19 @@ default_installation(){
     kubeflow_install_pipelines
 }
 
+
+wait_k3s(){
+    info "Waiting k3s"
+    waiting_pod_array=("k8s-app=kube-dns;kube-system" 
+                       "k8s-app=metrics-server;kube-system"
+                       )
+
+    for i in "${waiting_pod_array[@]}"; do 
+      echo "$i"; 
+      IFS=';' read -ra VALUES <<< "$i"
+        wait "${VALUES[0]}" "${VALUES[1]}"
+    done
+}
 
 manage_plugin(){
  PLUGIN=$1
