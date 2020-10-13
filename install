@@ -36,7 +36,7 @@ infoL "Testing.." $1.$2
 while [ : ]
   do
     sleep_cursor &
-    kubectl wait --for condition=available --timeout=14s deploy -l  $1   -n $2
+    k3s kubectl wait --for condition=available --timeout=14s deploy -l  $1   -n $2
     status=$?
     
     if [ $status -ne 0 ]
