@@ -148,6 +148,8 @@ k3s_install_binary(){
  chmod +x k3s
  $SUDO mv k3s $BIN_DIR
  $SUDO k3s server --write-kubeconfig-mode 644 > /dev/null 2>&1 &
+ sleep_cursor
+ sleep_cursor
  wait_k3s
 }
 
