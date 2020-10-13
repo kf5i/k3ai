@@ -55,7 +55,21 @@ kubeflow_install_pipelines(){
 
 ##################
 INTERNAL_INSTALL_K3S_EXEC=""
+setup_env(){
+# --- use sudo if we are not already root ---
+ SUDO=sudo
+ if [ $(id -u) -eq 0 ]; then
+    SUDO=
+ fi
 
+ # --- use binary install directory if defined or create default ---
+ if [ -n "${INSTALL_K3S_BIN_DIR}" ]; then
+    BIN_DIR=${INSTALL_K3S_BIN_DIR}
+else
+    BIN_DIR=/usr/local/bin
+fi
+
+}
 
 k3s_install_service()
 {
@@ -129,8 +143,16 @@ manage() {
 
 
 
+k3s_install_binary(){
+ curl -o k3s  -sfL https://github.com/rancher/k3s/releases/download/v1.19.2%2Bk3s1/k3s
+ chmod +x k3s
+ $SUDO mv k3s $BIN_DIR
+ $SUDO k3s server
+}
+
 
 main() {
+    setup_env 
     ### DEFAULT == --cpu and --pipelines
     if [[ "$#" -eq 0 ]]; then
      default_installation
@@ -146,6 +168,12 @@ main() {
       "--cpu")
           info "Installing the CPU Support"
           k3s_install_service
+          manage $OR
+          shift 1
+          ;;
+      "--wsl")
+          info "Installing the wsl Support"
+          k3s_install_binary
           manage $OR
           shift 1
           ;;
