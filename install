@@ -147,7 +147,7 @@ k3s_install_binary(){
  curl -o k3s  -sfL https://github.com/rancher/k3s/releases/download/v1.19.2%2Bk3s1/k3s
  chmod +x k3s
  $SUDO mv k3s $BIN_DIR
- $SUDO k3s server
+ $SUDO k3s server --write-kubeconfig-mode 644
 }
 
 
