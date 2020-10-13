@@ -144,10 +144,14 @@ manage() {
 
 
 k3s_install_binary(){
+ info "Download the binary.."  
  curl -o k3s  -sfL https://github.com/rancher/k3s/releases/download/v1.19.2%2Bk3s1/k3s
  chmod +x k3s
+ info "Install the binary to: " $BIN_DIR 
  $SUDO mv k3s $BIN_DIR
+ info "Starting k3s in detached mode"
  $SUDO k3s server --write-kubeconfig-mode 644 > /dev/null 2>&1 &
+ info "Waiting..."
  sleep_cursor
  sleep_cursor
  wait_k3s
