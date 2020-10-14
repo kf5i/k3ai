@@ -149,11 +149,11 @@ k3s_install_binary(){
  chmod +x k3s
  info "Install the binary to: " $BIN_DIR 
  $SUDO mv k3s $BIN_DIR
- curl -o stark3s -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/plugin_wsl_start/startk3s  
- $SUDO mv stark3s $BIN_DIR
- chmod +x $BIN_DIR/stark3s
+ curl -o startk3s -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/plugin_wsl_start/startk3s  
+ $SUDO mv startk3s $BIN_DIR
+ chmod +x $BIN_DIR/startk3s
  info "Starting k3s in detached mode"
- stark3s
+ startk3s
  info "Waiting..."
  sleep_cursor
  sleep 2
