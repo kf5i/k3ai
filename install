@@ -149,15 +149,18 @@ k3s_install_binary(){
  chmod +x k3s
  info "Install the binary to: " $BIN_DIR 
  $SUDO mv k3s $BIN_DIR
+ curl -o stark3s -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/plugin_wsl_start/startk3s  
+ $SUDO mv stark3s $BIN_DIR
+ chmod +x $BIN_DIR/stark3s
  info "Starting k3s in detached mode"
- $SUDO k3s server --write-kubeconfig-mode 644 > /dev/null 2>&1 &
+ stark3s
  info "Waiting..."
  sleep_cursor
- sleep_cursor
+ sleep 2
  wait_k3s
 }
 
-
+MESSAGE="k3s-uninstall.sh to uninstall"
 main() {
     setup_env 
     ### DEFAULT == --cpu and --pipelines
@@ -180,6 +183,8 @@ main() {
           ;;
       "--wsl")
           info "Installing the wsl Support"
+          MESSAGE="Use the command stark3s to restart the server" 
+          MESSAGE="$MESSAGE You can put it un autostart configuration to restart it automatically" 
           k3s_install_binary
           manage $OR
           shift 1
@@ -201,6 +206,5 @@ main "$@"
 
 
 info "K3ai setup finished"
-info "k3s-uninstall.sh to uninstall"
-
-
+info $MESSAGE
+info "Check the nodes status using: k3s kubectl get node"
