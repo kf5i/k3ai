@@ -36,7 +36,7 @@ infoL "Testing.." $1.$2
 while [ : ]
   do
     sleep_cursor &
-    kubectl wait --for condition=available --timeout=14s deploy -l  $1   -n $2
+    k3s kubectl wait --for condition=available --timeout=14s deploy -l  $1   -n $2
     status=$?
     
     if [ $status -ne 0 ]
@@ -55,7 +55,21 @@ kubeflow_install_pipelines(){
 
 ##################
 INTERNAL_INSTALL_K3S_EXEC=""
+setup_env(){
+# --- use sudo if we are not already root ---
+ SUDO=sudo
+ if [ $(id -u) -eq 0 ]; then
+    SUDO=
+ fi
 
+ # --- use binary install directory if defined or create default ---
+ if [ -n "${INSTALL_K3S_BIN_DIR}" ]; then
+    BIN_DIR=${INSTALL_K3S_BIN_DIR}
+else
+    BIN_DIR=/usr/local/bin
+fi
+
+}
 
 k3s_install_service()
 {
@@ -129,8 +143,26 @@ manage() {
 
 
 
+k3s_install_binary(){
+ info "Download the binary.."  
+ curl -o k3s  -sfL https://github.com/rancher/k3s/releases/download/v1.19.2%2Bk3s1/k3s
+ chmod +x k3s
+ info "Install the binary to: " $BIN_DIR 
+ $SUDO mv k3s $BIN_DIR
+ curl -o startk3s -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/plugin_wsl_start/startk3s  
+ $SUDO mv startk3s $BIN_DIR
+ chmod +x $BIN_DIR/startk3s
+ info "Starting k3s in detached mode"
+ startk3s
+ info "Waiting..."
+ sleep_cursor
+ sleep 2
+ wait_k3s
+}
 
+MESSAGE="k3s-uninstall.sh to uninstall"
 main() {
+    setup_env 
     ### DEFAULT == --cpu and --pipelines
     if [[ "$#" -eq 0 ]]; then
      default_installation
@@ -146,6 +178,14 @@ main() {
       "--cpu")
           info "Installing the CPU Support"
           k3s_install_service
+          manage $OR
+          shift 1
+          ;;
+      "--wsl")
+          info "Installing the wsl Support"
+          MESSAGE="Use the command stark3s to restart the server" 
+          MESSAGE="$MESSAGE You can put it un autostart configuration to restart it automatically" 
+          k3s_install_binary
           manage $OR
           shift 1
           ;;
@@ -166,6 +206,5 @@ main "$@"
 
 
 info "K3ai setup finished"
-info "k3s-uninstall.sh to uninstall"
-
-
+info $MESSAGE
+info "Check the nodes status using: k3s kubectl get node"
