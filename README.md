@@ -25,7 +25,7 @@ Look for interaction with us? Join our slack channel:  [**https://kf5ikfai.slack
 
 ## Components of K3ai
 
-Currently, we do install the following components \(the list is changing and growing\):
+K3ai curently provides: \(the list is changing and growing\):
 
 * Kubernetes based on K3s from Rancher: [https://k3s.io/](https://k3s.io/)
 * Kubeflow pipelines: [https://github.com/kubeflow/pipelines](https://github.com/kubeflow/pipelines)
