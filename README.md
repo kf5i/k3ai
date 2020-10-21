@@ -7,13 +7,12 @@ description: >-
 
 # K3ai \(keɪ3ai\)
 
-## What is K3ai
+K3ai is a lightweight infrastructure-in-a-box solution specifically built to install and configure AI tools and platforms in production evironments on Edge and IoT devices as easily as local test environments.
 
 ![k3ai in action](.gitbook/assets/aio.gif)
 
-K3ai is a lightweight infrastructure-in-a-box solution specifically built to install and configure AI tools and platforms in production evironments on Edge and IoT devices as easily as local test environments.
 
-Ready to experiment?
+## Ready to try it out?
 
 ```text
 curl -sfL https://get.k3ai.in | bash -
