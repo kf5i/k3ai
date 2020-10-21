@@ -11,7 +11,7 @@ K3ai is a lightweight infrastructure-in-a-box solution specifically built to ins
 curl -sfL https://get.k3ai.in | bash -
 ```
 
-Full Documentaiton:  [https://docs.k3ai.in](https://docs.k3ai.in)
+Full Documentaton:  [https://docs.k3ai.in](https://docs.k3ai.in)
 
 Look for interaction with us? Join our slack channel:  [**https://kf5ikfai.slack.com**](https://join.slack.com/t/kf5ikfai/shared_invite/zt-huh5ib1f-ZyBxqyBDKooGNvpd5_MoQQ)
 
