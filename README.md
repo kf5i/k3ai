@@ -5,7 +5,7 @@ K3ai is a lightweight infrastructure-in-a-box solution specifically built to ins
 ![k3ai in action](.gitbook/assets/aio.gif)
 
 
-## Ready to try it out?
+## Ready to experiment?
 
 ```text
 curl -sfL https://get.k3ai.in | bash -
