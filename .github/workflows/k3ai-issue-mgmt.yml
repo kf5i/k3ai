@@ -1,0 +1,73 @@
+# This is a basic workflow to help you get started with Actions
+name: K3ai Triage Management Workflow
+
+on:
+  issues:
+    types: [opened,reopened]
+  pull_request:
+    types: [opened,reopened]
+env:
+  MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+  
+jobs:
+  first_time_contribution:
+    #First we check if this is the first time contribution for the user
+    # if so we congratulate with the Author and welcome the K3ai family
+    # if not we move to the next job
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.FirstTime.outputs.test }}
+    steps:
+    - id: firstTime
+      run: echo "Well first things first, is this your first time on here?"
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
+        issue-message: '# :+1: Seems like this is the first time issue for you.
+            
+            Thank You for taking the time to contribute to K3ai project!'
+    
+
+  standard_contribution:
+    # This user already contributed somehow to the K3ai project so we thank 
+    # the author for the issue and let know we will follow up soon.
+    runs-on: ubuntu-latest
+    steps:
+    - uses: bubkoo/auto-comment@v1
+      with:
+        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        issuesOpenedReactions: 'hooray, +1'
+        issuesOpened: >
+             ## I've opened an Issue What will happen now?
+              So here it is what our super duper bot will do for you :point_down:
+              1) Our Super Duper @k3aibot will add some label to your issue to your issue to better track it
+              2) Second @k3aibot will move the issue into our funnel here (General Funnel Board)[https://github.com/orgs/kf5i/projects/3]
+              3) One of the K3ai members will be assigned to review your issue and start the real job on it
+              Oh one last thing if you like to speed up the entire process let us know what kind of issue is this adding one of these labels (only one per comment)
+                :point_down: :point_down: :point_down:
+              - /ena this is needed if your issue require a new feature
+              - /bug in case you forgot to use the bug template we will take care of it
+              - /question if it is a Question for us
+              - /docs if this require us to update/refresh our docs
+  add_triage_label:
+    needs: standard_contribution
+    # Now we add a basic label called "needs-triage" to the issue and move on
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-ecosystem/action-add-labels@v1
+        #if: ${{ startsWith(github.event.comment.body, '/add-labels') }}
+        with:
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          labels: needs-triage
+  
+  assign_funnel:
+    needs: add_triage_label
+    #Let's add the issue to "General Funnel" project to log the volume of issues we have over the project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: srggrs/assign-one-project-github-action@1.2.0
+        if:  contains(github.event.issue.title, '[feat:]')
+        with:
+          project: 'https://github.com/orgs/kf5i/projects/3'
+          column_name: 'General Funnel'
