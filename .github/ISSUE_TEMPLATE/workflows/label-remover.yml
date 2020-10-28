@@ -1,0 +1,25 @@
+name: Remove All Labels
+
+on:
+  pull_request:
+    types: [closed]
+  issues:
+    types: [closed]
+
+jobs:
+  remove_labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rogerluan/label-remover@v1.0.1
+        with:
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+  assign_funnel:
+    #Let's add the issue to "General Funnel" project to log the volume of issues we have over the project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: srggrs/assign-one-project-github-action@1.2.0
+        if:  contains(github.event.issue.title, '[feat:]')
+        with:
+          project: 'https://github.com/orgs/kf5i/projects/3'
+          column_name: 'Closed'
