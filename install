@@ -17,6 +17,13 @@ infoL()
     echo -en '[INFO] ' "$@\n"
 }
 
+notes()
+{
+    echo "$@" >> notes
+}
+
+
+
 sleep_cursor()
 {
  chars="/-\|"
@@ -202,9 +209,15 @@ main() {
     done
 }
 
-main "$@"
+echo "" > notes
+notes "[K3ai]"
+notes "https://docs.k3ai.in/"
 
+main "$@"
 
 info "K3ai setup finished"
 info $MESSAGE
 info "Check the nodes status using: k3s kubectl get node"
+info "Check the notes file for the install info"
+
+cat notes
