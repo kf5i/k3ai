@@ -202,9 +202,13 @@ main() {
     done
 }
 
-main "$@"
 
+if [[ "${OSTYPE/-*}" != "linux" ]]; then
+  info "K3ai  works only on Linux. The new version: https://github.com/kf5i/k3ai-core will be cross-platform :)!"
+else
+  main "$@"
 
-info "K3ai setup finished"
-info $MESSAGE
-info "Check the nodes status using: k3s kubectl get node"
+  info "K3ai setup finished"
+  info $MESSAGE
+  info "Check the nodes status using: k3s kubectl get node"
+fi
