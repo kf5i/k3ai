@@ -4,8 +4,8 @@ name: K3ai Triage Management Workflow
 on:
   issues:
     types: [opened,reopened]
-  pull_request:
-    types: [opened,reopened]
+#  pull_request:
+#    types: [opened,reopened]
 env:
   MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
   
