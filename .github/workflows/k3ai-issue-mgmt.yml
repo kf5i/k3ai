@@ -58,7 +58,7 @@ jobs:
       - uses: actions-ecosystem/action-add-labels@v1
         #if: ${{ startsWith(github.event.comment.body, '/add-labels') }}
         with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           labels: needs-triage
   
   assign_funnel:
@@ -69,6 +69,6 @@ jobs:
       - uses: srggrs/assign-one-project-github-action@1.2.0
         if:  contains(github.event.issue.title, '[feat:]')
         with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
           project: 'https://github.com/orgs/kf5i/projects/3'
           column_name: 'General Funnel'
