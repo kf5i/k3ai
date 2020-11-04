@@ -8,11 +8,15 @@ echo @"
     $OS="windows"
     $ARCH="amd64"
     $repo = "kf5i/k3ai-core"
+    $myHome=Get-Location
+    
+    New-Item -Path $env:userprofile -Force -Name ".k3ai" -ItemType Directory
+    Set-Location -Path "$($env:userprofile)/.k3ai"
 # Download latest dotnet/codeformatter release from github
 # Author Mötz Jensen @Splaxi https://gist.github.com/Splaxi
 
 $filenamePattern = "*k3ai-core_0.1.0_"+$OS+"_"+$ARCH+".zip"
-$pathExtract = ".k3ai"
+$pathExtract = "$($env:userprofile)/.k3ai"
 $innerDirectory = $true
 $preRelease = $false
 
@@ -43,11 +47,17 @@ else {
 }
 
 Remove-Item $pathZip -Force
-wget --directory-prefix=.k3ai https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt
-$path=".k3ai/k3ai.txt"
-Get-Content -Raw $path
-Write-Host "To use K3ai simply start with:`n./K3ai-cli -h`nRemeber to add K3ai-cli to your path to path."
 
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt" -Out "$($env:userprofile)/.k3ai/k3ai.txt"
+$path="$($env:userprofile)/.k3ai/k3ai.txt"
+$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
+$newpath="$oldpath;$($env:userprofile)/.k3ai"
+Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
+clear
+Get-Content -Raw $path
+Write-Host "To use K3ai simply start with:`nK3ai-cli -h`nRemeber to add K3ai-cli to your path to path."
+
+Set-Location -Path $myHome
 # Powershell End -------------------------------------------------------
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 out-null
