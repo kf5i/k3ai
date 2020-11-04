@@ -163,7 +163,7 @@ fi
 main
 # Bash End
 echo -n
-cat k3ai.txt
+curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt
 echo -e "\n"
 echo -e "To use K3ai simply start with:\nK3ai-cli -h"
 echo > /dev/null <<out-null
