@@ -12,7 +12,7 @@ echo @"
 # Author Mötz Jensen @Splaxi https://gist.github.com/Splaxi
 
 $filenamePattern = "*k3ai-core_0.1.0_"+$OS+"_"+$ARCH+".zip"
-$pathExtract = "."
+$pathExtract = ".k3ai"
 $innerDirectory = $true
 $preRelease = $false
 
@@ -46,7 +46,8 @@ Remove-Item $pathZip -Force
 Remove-Item LICENSE
 Remove-Item README.md
 Remove-Item k3ai-cli.exe
-$path="https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt"
+wget --directory-prefix=.k3ai https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt
+$path=".k3ai/k3ai.txt"
 Get-Content -Raw $path
 Write-Host "To use K3ai simply start with:`n./K3ai-cli -h`nRemeber to add K3ai-cli to your path to path."
 
@@ -63,7 +64,10 @@ UNOS=$(uname -s)
 echo 'Switching to bash...'
 
 function cleanup {
-	rm -rf $TMP_DIR > /dev/null
+    rm -rf $TMP_DIR > /dev/null
+    rm -r .k3ai > /dev/null
+    mkdir .k3ai > /dev/null
+    wget --directory-prefix=.k3ai https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt > /dev/null
 }
 
 function fail {
@@ -148,10 +152,10 @@ fi
 
 # Bash End
 #echo > /dev/null <<out-null
+
 main
 # Bash End
 echo -n
-curl -LJO https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt
 cat k3ai.txt
 echo -e "\n"
 echo -e "To use K3ai simply start with:\nK3ai-cli -h"
