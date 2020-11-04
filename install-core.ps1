@@ -48,14 +48,14 @@ else {
 
 Remove-Item $pathZip -Force
 
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt" -Out "$($env:userprofile)/.k3ai/k3ai.txt"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kf5i/k3ai/master/k3ai.txt" -Out "$($env:userprofile)/.k3ai/k3ai.txt"
 $path="$($env:userprofile)/.k3ai/k3ai.txt"
 $oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
 $newpath="$oldpath;$($env:userprofile)/.k3ai"
 Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
 clear
 Get-Content -Raw $path
-Write-Host "To use K3ai simply start with:`nK3ai-cli -h`nRemeber to add K3ai-cli to your path to path."
+Write-Host "To use K3ai simply start with:`nK3ai-cli -h"
 
 Set-Location -Path $myHome
 # Powershell End -------------------------------------------------------
@@ -74,7 +74,7 @@ function cleanup {
     rm -rf $TMP_DIR > /dev/null
     rm -r .k3ai > /dev/null
     mkdir .k3ai > /dev/null
-    wget --directory-prefix=.k3ai https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt > /dev/null
+    wget --directory-prefix=.k3ai https://raw.githubusercontent.com/kf5i/k3ai/master/k3ai.txt > /dev/null
 }
 
 function fail {
@@ -163,7 +163,7 @@ fi
 main
 # Bash End
 echo -n
-curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt
+curl -sfL https://raw.githubusercontent.com/kf5i/k3ai/master/k3ai.txt
 echo -e "\n"
 echo -e "To use K3ai simply start with:\nK3ai-cli -h"
 echo > /dev/null <<out-null
