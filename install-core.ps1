@@ -46,7 +46,7 @@ Remove-Item $pathZip -Force
 Remove-Item LICENSE
 Remove-Item README.md
 Remove-Item k3ai-cli.exe
-$path="k3ai.txt"
+$path="https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt"
 Get-Content -Raw $path
 Write-Host "To use K3ai simply start with:`n./K3ai-cli -h`nRemeber to add K3ai-cli to your path to path."
 
@@ -151,7 +151,7 @@ fi
 main
 # Bash End
 echo -n
-cat k3ai.txt
+cat https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt
 echo -e "\n"
 echo -e "To use K3ai simply start with:\nK3ai-cli -h"
 echo > /dev/null <<out-null
