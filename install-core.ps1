@@ -43,9 +43,6 @@ else {
 }
 
 Remove-Item $pathZip -Force
-Remove-Item LICENSE
-Remove-Item README.md
-Remove-Item k3ai-cli.exe
 wget --directory-prefix=.k3ai https://raw.githubusercontent.com/kf5i/k3ai/b07ae1269880d9fcb58f76e719148551799d3325/k3ai.txt
 $path=".k3ai/k3ai.txt"
 Get-Content -Raw $path
