@@ -21,5 +21,6 @@ jobs:
       - uses: srggrs/assign-one-project-github-action@1.2.0
         if:  contains(github.event.issue.title, '[feat:]')
         with:
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
           project: 'https://github.com/orgs/kf5i/projects/3'
           column_name: 'Closed'
