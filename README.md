@@ -29,3 +29,6 @@ K3ai curently provides: \(the list is changing and growing\):
   * ResNet
   * Mnist (coming soon)
 
+## Hall of fames of K3ai Contributors
+
+[![](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/images/0)](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/links/0)[![](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/images/1)](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/links/1)[![](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/images/2)](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/links/2)[![](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/images/3)](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/links/3)[![](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/images/4)](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/links/4)[![](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/images/5)](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/links/5)[![](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/images/6)](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/links/6)[![](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/images/7)](https://sourcerer.io/fame/alfsuse/kf5i/k3ai/links/7)
