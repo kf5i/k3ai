@@ -6,7 +6,7 @@ on:
   issues:
     types: [closed]
 env:
-  MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+ github_token: ${{ secrets.MY_GITHUB_TOKEN }}
 jobs:
   remove_labels:
     runs-on: ubuntu-latest
