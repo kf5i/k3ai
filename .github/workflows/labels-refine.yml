@@ -18,7 +18,7 @@ jobs:
         if: ${{ startsWith(github.event.comment.body, '/ena') }}
         with:
           github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          labels: enhancement
+          labels: ena
 
   add_bug_label:
     # Now we add a basic label called "needs-triage" to the issue and move on
