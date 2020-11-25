@@ -9,13 +9,16 @@ echo @"
     $ARCH="amd64"
     $repo = "kf5i/k3ai-core"
     $myHome=Get-Location
+    $releases = "https://api.github.com/repos/$repo/releases"
+    $tag = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].tag_name
+    $tag=$tag.substring(1)
     
     New-Item -Path $env:userprofile -Force -Name ".k3ai" -ItemType Directory
     Set-Location -Path "$($env:userprofile)/.k3ai"
 # Download latest dotnet/codeformatter release from github
 # Author Mötz Jensen @Splaxi https://gist.github.com/Splaxi
 
-$filenamePattern = "*k3ai-core_0.1.1_"+$OS+"_"+$ARCH+".zip"
+$filenamePattern = "*k3ai-core_"+$tag+"_"+$OS+"_"+$ARCH+".zip"
 $pathExtract = "$($env:userprofile)/.k3ai"
 $innerDirectory = $true
 $preRelease = $false
@@ -53,7 +56,7 @@ $path="$($env:userprofile)/.k3ai/k3ai.txt"
 $oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
 $newpath="$oldpath;$($env:userprofile)/.k3ai"
 Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
-clear
+Clear-Host
 Get-Content -Raw $path
 Write-Host "To use K3ai simply start with:`nK3ai-cli -h"
 
@@ -103,12 +106,12 @@ function install {
     if sudo true; then
     mypwd=$(pwd)
         mkdir ${TMP_DIR} && cd ${TMP_DIR} && $GET \
-        && tar -xvzf k3ai-core_0.1.1_${OS}_${ARCH}.tar.gz && sudo chmod +x ./k3ai-cli \
+        && tar -xvzf k3ai-core_${tag}_${OS}_${ARCH}.tar.gz && sudo chmod +x ./k3ai-cli \
         && sudo mv ./k3ai-cli /usr/local/bin && cd ${mypwd} && sudo rm -rf $TMP_DIR
     else
     mypwd=$(pwd)
         mkdir /tmp/k3ai-tmp && cd /tmp/k3ai-tmp &&  $GET \
-         && tar -xvzf k3ai-core_0.1.1_${OS}_${ARCH}.tar.gz && chmod +x k3ai-cli && \
+         && tar -xvzf k3ai-core_${tag}_${OS}_${ARCH}.tar.gz && chmod +x k3ai-cli && \
          mv k3ai-cli /usr/local/bin && cd ${mypwd} && rmdir /tmp/k3ai-tmp
     fi
     clear
@@ -117,7 +120,9 @@ function install {
 function unix_download {
     echo "Ready to download..."
     setup_env
-    URL="https://github.com/kf5i/k3ai-core/releases/latest/download/k3ai-core_0.1.1_${OS}_${ARCH}.tar.gz"
+    tag=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | awk -F '"' '/tag_name/{print $4}')
+    tag=${tag#"v"}
+    URL="https://github.com/kf5i/k3ai-core/releases/latest/download/k3ai-core_${tag}_${OS}_${ARCH}.tar.gz"
 if which curl > /dev/null; then
     GET="curl"
     if [[ $INSECURE = "true" ]]; then GET="$GET --insecure"; fi
