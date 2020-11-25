@@ -53,12 +53,11 @@ Remove-Item $pathZip -Force
 
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kf5i/k3ai/master/k3ai.txt" -Out "$($env:userprofile)/.k3ai/k3ai.txt"
 $path="$($env:userprofile)/.k3ai/k3ai.txt"
-$oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).path
-$newpath="$oldpath;$($env:userprofile)/.k3ai"
-Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value $newPath
-Clear-Host
+[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$($env:userprofile)\.k3ai", "User")
+# Clear-Host
+sleep 10
 Get-Content -Raw $path
-Write-Host "To use K3ai simply start with:`nK3ai-cli -h"
+Write-Host "To use K3ai close and reopen the Terminal:`nK3ai-cli -h"
 
 Set-Location -Path $myHome
 # Powershell End -------------------------------------------------------
