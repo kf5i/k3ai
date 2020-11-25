@@ -107,7 +107,7 @@ function install {
     mypwd=$(pwd)
         mkdir ${TMP_DIR} && cd ${TMP_DIR} && $GET \
         && tar -xvzf k3ai-core_${tag}_${OS}_${ARCH}.tar.gz && sudo chmod +x ./k3ai-cli \
-        && sudo mv ./k3ai-cli /usr/local/bin && cd ${mypwd} && sudo rm -rf $TMP_DIR
+        && sudo mv ./k3ai-cli /usr/local/bin/ && cd ${mypwd} && sudo rm -rf $TMP_DIR
     else
     mypwd=$(pwd)
         mkdir /tmp/k3ai-tmp && cd /tmp/k3ai-tmp &&  $GET \
@@ -122,7 +122,7 @@ function unix_download {
     setup_env
     tag=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | awk -F '"' '/tag_name/{print $4}')
     tag=${tag#"v"}
-    URL="https://github.com/kf5i/k3ai-core/releases/latest/download/k3ai-core_${tag}_${OS}_${ARCH}.tar.gz"
+    URL="https://github.com/kf5i/k3ai-core/releases/download/v$tag/k3ai-core_${tag}_${OS}_${ARCH}.tar.gz"
 if which curl > /dev/null; then
     GET="curl"
     if [[ $INSECURE = "true" ]]; then GET="$GET --insecure"; fi
