@@ -1,5 +1,7 @@
 # K3ai \(keɪ3ai\)
 
+## NOTE: The installer is not used anymore. Please use k3ai-core repo and the new k3ai command-line as in https://docs.k3ai.in
+
 K3ai is a lightweight infrastructure-in-a-box solution specifically built to install and configure AI tools and platforms in production evironments on Edge and IoT devices as easily as local test environments.
 
 ![k3ai in action](.gitbook/assets/aio.gif)
