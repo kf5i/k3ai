@@ -1,5 +1,9 @@
 # K3ai \(keɪ3ai\)
 
+![GitHub all releases](https://img.shields.io/github/downloads/kf5i/k3ai/total?style=for-the-badge)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/kf5i/k3ai?style=for-the-badge)
+![GitHub contributors](https://img.shields.io/github/contributors/kf5i/k3ai?style=for-the-badge)
+
 ## NOTE: The installer is not used anymore. Please use k3ai-core repo and the new k3ai command-line as in https://docs.k3ai.in
 
 ### This repo is left for reference.
