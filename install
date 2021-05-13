@@ -113,8 +113,8 @@ manage_plugin(){
  PLUGIN=$1
  PLUGIN="${PLUGIN:2}"
  info "Installing plugin: " $PLUGIN
- info "URL:" https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/$PLUGIN/install
- curl -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/$PLUGIN/install | bash -s -
+ info "URL:" https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/v1/$PLUGIN/install
+ curl -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/v1/$PLUGIN/install | bash -s -
 }
 
 
@@ -149,7 +149,7 @@ k3s_install_binary(){
  chmod +x k3s
  info "Install the binary to: " $BIN_DIR 
  $SUDO mv k3s $BIN_DIR
- curl -o startk3s -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/plugin_wsl_start/startk3s  
+ curl -o startk3s -sfL https://raw.githubusercontent.com/kf5i/k3ai-plugins/main/v1/plugin_wsl_start/startk3s  
  $SUDO mv startk3s $BIN_DIR
  chmod +x $BIN_DIR/startk3s
  info "Starting k3s in detached mode"
