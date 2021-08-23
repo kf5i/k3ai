@@ -5,6 +5,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/kf5i/k3ai?style=for-the-badge)
 
 ## NOTE: The installer is not used anymore. Please use k3ai-core repo and the new k3ai command-line as in https://docs.k3ai.in
+## If you need to open an Issue please use the k3ai-core repo
 
 ### This repo is left for reference.
 
