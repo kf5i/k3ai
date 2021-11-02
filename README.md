@@ -1,3 +1,5 @@
+# WE RELEASED THE NEW VERSION CHECK THE NEW ORG AT: [https://github.com/k3ai](https://github.com/k3ai) AND OUR NEW WEBSITE/DOCS AT: [https://k3ai.in](https://k3ai.in)
+
 # K3ai \(keɪ3ai\)
 
 ![GitHub all releases](https://img.shields.io/github/downloads/kf5i/k3ai/total?style=for-the-badge)
